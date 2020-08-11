@@ -1,0 +1,10 @@
+/* Style the header */
+.header {
+    grid-area: header;
+    padding: 30px;
+    text-align: center;
+    font-size: 25px;
+    background: cadetblue;
+    color: white;
+    margin-bottom: .5rem;
+}
