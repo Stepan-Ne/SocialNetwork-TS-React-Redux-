@@ -12,3 +12,8 @@
      grid-column-gap: 10px;
 }
 
+.content {
+    padding: 2rem;
+    background-color: beige;
+    grid-area: content;
+}
