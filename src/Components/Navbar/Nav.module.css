@@ -3,3 +3,11 @@
     background-color: tan;
     padding: 2rem;
 }
+.item a {
+    color: forestgreen;
+    text-decoration: none;
+    font-size: 2vh;
+}
+.item a.act {
+    color: brown;
+}

@@ -4,18 +4,27 @@ import {Header} from "./Components/Header/Header";
 import {Profile} from "./Components/ProfilePage/Profile";
 import {Users} from "./Components/Users/Users";
 import {Nav} from "./Components/Navbar/Nav";
+import {BrowserRouter, Route} from 'react-router-dom';
+
+
+
 
 function App() {
     return (
-        <div className="app-wrapper">
-            <Header/>
-            <Nav/>
-            <div className="content">
-                <Profile/>
-                {/*<Users/>*/}
-            </div>
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <Nav/>
+                <div className="content">
+                    <Route path="/profile" component={Profile}/>
+                    <Route path="/users" component={Users}/>
+                </div>
 
-        </div>
+            </div>
+        </BrowserRouter>
+
+
     );
 }
+
 export default App;
