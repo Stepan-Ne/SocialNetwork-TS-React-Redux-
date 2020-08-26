@@ -27,6 +27,11 @@ type PropsType = {
 }
 //COMPONENT
 const Dialogs: React.FC<PropsType> = (props) => {
+
+    let dialogsData = [
+        {id: "1", name: "Luba"}
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.persons}>
