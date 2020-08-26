@@ -11,6 +11,9 @@ export function Nav() {
             <div  className={classes.item}>
                 <NavLink to="/users" activeClassName={classes.act}>Users</NavLink>
             </div>
+            <div  className={classes.item}>
+                <NavLink to="/dialogs" activeClassName={classes.act}>Dialogs</NavLink>
+            </div>
 
 
         </div>

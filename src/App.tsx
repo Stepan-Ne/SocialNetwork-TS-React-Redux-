@@ -1,26 +1,16 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Header} from "./Components/Header/Header";
-import {MessageType, Profile} from "./Components/ProfilePage/Profile";
+import Profile from "./Components/ProfilePage/Profile";
 import {Users} from "./Components/Users/Users";
 import {Nav} from "./Components/Navbar/Nav";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {v1} from "uuid";
+import Dialogs from "./Components/Dialogs/Dialogs";
 
 
 function App() {
 
-    // Global State
-    const [Posts, setPosts] = useState<Array<MessageType>>([
-        {id: v1(), text: "'Hello! How are you?", likesCount: 1}
-    ])
-    //add message
-    let messages = Posts;
-
-    function addPost(value: string) {
-        let newPost: MessageType = {id: v1(), text: value, likesCount: 0}
-        setPosts([newPost, ...Posts])
-    }
 
     return (
         <BrowserRouter>
@@ -28,8 +18,9 @@ function App() {
                 <Header/>
                 <Nav/>
                 <div className="content">
-                    <Route path="/profile" render={() => <Profile addPost={addPost} messages={messages}/>}/>
+                    <Route path="/profile" render={() => <Profile/>}/>
                     <Route path="/users" component={Users}/>
+                    <Route path="/dialogs" component={Dialogs}/>
                 </div>
 
             </div>

@@ -1,14 +1,18 @@
 import React from "react";
 import classes from "./Post.module.css";
-import {MessageType, PropsType} from "../Profile";
 
+type PostPropsType = {
+    message: string
+    likesCount: string
+    id: string
+}
 
-export function Post(props: MessageType) {
+export function Post(props: PostPropsType) {
     return (
         <div className={classes.item}>
-            {props.text}
+            <p>{props.message}</p>
             <div>
-                <span>Likes {props.likesCount}</span>
+                <span>Likes: {props.likesCount}</span>
             </div>
         </div>
     )

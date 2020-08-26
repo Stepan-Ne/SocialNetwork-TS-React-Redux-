@@ -1,56 +1,30 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React from "react";
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
 
-export type MessageType = {
-    id: string
-    text: string
-    likesCount: number
-}
-export type PropsType = {
-    messages: Array<MessageType>
-    addPost: (value: string) => void
-}
 
 //COMPONENT
-export function Profile(props: PropsType) {
-    // Local State
-    const [newPostText, setNewPostText] = useState('')
+function Profile() {
 
-    //OnChangeHandler
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setNewPostText(e.currentTarget.value);
-    }
-    //onKeyPressHandler
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.ctrlKey && e.charCode === 13) {
-            props.addPost(newPostText)
-            setNewPostText('')
-        }
-    }
-
-    //Add Post
-    function onAddPost() {
-        props.addPost(newPostText)
-        setNewPostText('')
-    }
-
-    //POSTS
-    let posts = props.messages.map(m => <Post key={m.id} text={m.text} likesCount={m.likesCount} id={m.id}/>)
+    let postsData = [
+        {id: "1", message: "Hi! How are you?", likesCount: "0"},
+        {id: "2", message: "Nice to meet you!", likesCount: "10"}
+    ]
 
     return (
         <div className={classes.content}>
             <h3>My Posts</h3>
-            <textarea placeholder={'your new post'} value={newPostText}
-                      onChange={onChangeHandler}
-                      onKeyPress={onKeyPressHandler}>i</textarea>
-            <button onClick={onAddPost}>Add Post</button>
             <div>
-                {posts}
+                <textarea placeholder={'your new post'}>i</textarea>
+            </div>
+            <div>
+                <button>Add Post</button>
+            </div>
+            <div>
+                {postsData.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>
     )
 }
 
-
-
+export default Profile;
