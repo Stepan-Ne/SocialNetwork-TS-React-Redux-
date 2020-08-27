@@ -9,7 +9,31 @@ import {v1} from "uuid";
 import Dialogs from "./Components/Dialogs/Dialogs";
 
 
-function App() {
+type DialogsMessagesType = {
+    message: string
+}
+type DialogsPersonsType = {
+    id: string
+    name: string
+}
+export type DialogsDataType = {
+    dialogsPersons: Array<DialogsPersonsType>
+    dialogsMessages: Array<DialogsMessagesType>
+}
+export type PostDataTypeElement = {
+    id: string
+    message: string
+    likesCount: string
+}
+type StatePropsType = {
+    postsData: Array<PostDataTypeElement>
+    dialogsData: DialogsDataType
+}
+type PropsType = {
+    state: StatePropsType
+}
+
+const App: React.FC<PropsType> = (props) => {
 
 
     return (
@@ -18,9 +42,9 @@ function App() {
                 <Header/>
                 <Nav/>
                 <div className="content">
-                    <Route path="/profile" render={() => <Profile/>}/>
+                    <Route path="/profile" render={() => <Profile postsData={props.state.postsData} />}/>
                     <Route path="/users" component={Users}/>
-                    <Route path="/dialogs" component={Dialogs}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogsData={props.state.dialogsData}/>}/>
                 </div>
 
             </div>

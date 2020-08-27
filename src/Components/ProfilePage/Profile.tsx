@@ -1,15 +1,14 @@
 import React from "react";
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
+import {PostDataTypeElement} from "../../App";
 
-
+type PropsProfileType = {
+    postsData: Array<PostDataTypeElement>
+}
 //COMPONENT
-function Profile() {
+function Profile(props: PropsProfileType) {
 
-    let postsData = [
-        {id: "1", message: "Hi! How are you?", likesCount: "0"},
-        {id: "2", message: "Nice to meet you!", likesCount: "10"}
-    ]
 
     return (
         <div className={classes.content}>
@@ -21,7 +20,7 @@ function Profile() {
                 <button>Add Post</button>
             </div>
             <div>
-                {postsData.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)}
+                {props.postsData.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>
     )
