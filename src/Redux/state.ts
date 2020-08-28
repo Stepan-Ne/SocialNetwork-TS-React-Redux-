@@ -1,3 +1,5 @@
+import {rerenderTree} from "../render";
+
 let state = {
     profilePage: {
         posts:  [
@@ -5,10 +7,10 @@ let state = {
             {id: "2", message: "Nice to meet you!", likesCount: "10"},
         ],
         addPost(postText: string) {
-            debugger
             this.posts.push(
                 {id: "3", message: postText, likesCount: "0"}
-            )
+            );
+            rer()
         }
     },
     dialogsPage: {
@@ -25,5 +27,5 @@ let state = {
     },
 
 }
-
+let rer = () => rerenderTree(state)
 export default state;

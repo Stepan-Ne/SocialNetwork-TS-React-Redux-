@@ -30,8 +30,8 @@ export type ProfilePageType = {
     posts: Array<PostTypeElement>
     addPost(postText: string): void;
 }
-//TYPE for STATE
-type StatePropsType = {
+//TYPE of STATE
+export type StatePropsType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsDataType
 }
