@@ -12,10 +12,12 @@ type PropsProfileType = {
 function Profile(props: PropsProfileType) {
 
     function onAddPostClick() {
-       props.state.addPost(text);
+       props.state.addPost();
+       props.state.newPostText = '';
     }
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
         text = e.currentTarget.value;
+        props.state.updateNewPostText(text);
     }
     // let newPostEl = React.createRef<HTMLTextAreaElement>();
     let text = '';
@@ -23,7 +25,7 @@ function Profile(props: PropsProfileType) {
         <div className={classes.content}>
             <h3>My Posts</h3>
             <div>
-                <textarea onChange={onChangeHandler} placeholder={'your new post'}>i</textarea>
+                <textarea onChange={onChangeHandler} value={props.state.newPostText}>i</textarea>
             </div>
             <div>
                 <button onClick={(e) => onAddPostClick()}>Add Post</button>

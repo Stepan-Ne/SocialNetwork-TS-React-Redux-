@@ -6,10 +6,15 @@ let state = {
             {id: "1", message: "Hi! How are you?", likesCount: "0"},
             {id: "2", message: "Nice to meet you!", likesCount: "10"},
         ],
-        addPost(postText: string) {
+        addPost() {
             this.posts.push(
-                {id: "3", message: postText, likesCount: "0"}
+                {id: "3", message: this.newPostText, likesCount: "0"}
             );
+            rer()
+        },
+        newPostText: "",
+        updateNewPostText(txt: string) {
+            this.newPostText = txt;
             rer()
         }
     },
@@ -24,8 +29,7 @@ let state = {
             {message: "Ho do you do?"},
             {message: "How are you?"}
         ]
-    },
-
+    }
 }
 let rer = () => rerenderTree(state)
 export default state;

@@ -27,8 +27,10 @@ export type PostTypeElement = {
     likesCount: string
 }
 export type ProfilePageType = {
+    newPostText: string
     posts: Array<PostTypeElement>
-    addPost(postText: string): void;
+    addPost(): void;
+    updateNewPostText(txt: string): void
 }
 //TYPE of STATE
 export type StatePropsType = {
