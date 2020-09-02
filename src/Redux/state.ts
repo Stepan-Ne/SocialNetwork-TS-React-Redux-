@@ -1,4 +1,6 @@
 import {ActionType} from "../App";
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
 let store = {
     _state: {
@@ -49,7 +51,8 @@ let store = {
 };
 
 
-
+export const addPostAC = () => ({type: ADD_POST});
+export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
 export default store;
 // addPost() {
 //     this._state.profilePage.posts.push(
