@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App, {StatePropsType} from './App';
 import * as serviceWorker from './serviceWorker';
-import state from './Redux/state';
-import {rerenderTree} from "./render";
+import store from './Redux/state';
 
-rerenderTree(state)
 
+
+let rerenderTree = (state: StatePropsType) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App state={state} addPost={store.addPost.bind(store)}
+                 updateNewPostText={store.updateNewPostText.bind(store)}/>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+rerenderTree(store.getState());
+store.subscribe(rerenderTree);
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App state={state} />

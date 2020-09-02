@@ -29,8 +29,6 @@ export type PostTypeElement = {
 export type ProfilePageType = {
     newPostText: string
     posts: Array<PostTypeElement>
-    addPost(): void;
-    updateNewPostText(txt: string): void
 }
 //TYPE of STATE
 export type StatePropsType = {
@@ -39,6 +37,8 @@ export type StatePropsType = {
 }
 type PropsType = {
     state: StatePropsType
+    addPost: () => void
+    updateNewPostText: (txt: string) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -49,7 +49,10 @@ const App: React.FC<PropsType> = (props) => {
                 <Header/>
                 <Nav/>
                 <div className="content">
-                    <Route path="/profile" render={() => <Profile state={props.state.profilePage} />}/>
+                    <Route path="/profile" render={() => <Profile
+                        state={props.state.profilePage}
+                        addPost={props.addPost}
+                        updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path="/users" component={Users}/>
                     <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>

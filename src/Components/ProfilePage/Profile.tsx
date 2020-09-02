@@ -7,17 +7,19 @@ import {ProfilePageType} from "../../App";
 
 type PropsProfileType = {
     state: ProfilePageType
+    addPost: () => void
+    updateNewPostText: (txt: string) => void
 }
 //COMPONENT
 function Profile(props: PropsProfileType) {
 
     function onAddPostClick() {
-       props.state.addPost();
+       props.addPost();
        props.state.newPostText = '';
     }
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
         text = e.currentTarget.value;
-        props.state.updateNewPostText(text);
+        props.updateNewPostText(text);
     }
     // let newPostEl = React.createRef<HTMLTextAreaElement>();
     let text = '';
