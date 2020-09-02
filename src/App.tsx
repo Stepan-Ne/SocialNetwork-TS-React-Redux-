@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Header} from "./Components/Header/Header";
 import Profile from "./Components/ProfilePage/Profile";
@@ -35,10 +35,13 @@ export type StatePropsType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsDataType
 }
+export type ActionType = {
+    type: string
+    newText?: any
+}
 type PropsType = {
     state: StatePropsType
-    addPost: () => void
-    updateNewPostText: (txt: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -51,8 +54,7 @@ const App: React.FC<PropsType> = (props) => {
                 <div className="content">
                     <Route path="/profile" render={() => <Profile
                         state={props.state.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}/>}/>
+                        dispatch={props.dispatch}/>}/>
                     <Route path="/users" component={Users}/>
                     <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>
@@ -62,6 +64,6 @@ const App: React.FC<PropsType> = (props) => {
 
 
     );
-}
+};
 
 export default App;

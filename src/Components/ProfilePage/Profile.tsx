@@ -1,28 +1,26 @@
 
-import React, {ChangeEvent, MouseEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
-import {ProfilePageType} from "../../App";
+import {ActionType, ProfilePageType} from "../../App";
 
 
 type PropsProfileType = {
     state: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (txt: string) => void
+    dispatch: (action: ActionType) => void
 }
 //COMPONENT
 function Profile(props: PropsProfileType) {
 
     function onAddPostClick() {
-       props.addPost();
+       props.dispatch({type: "ADD-POST"});
        props.state.newPostText = '';
     }
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
-        text = e.currentTarget.value;
-        props.updateNewPostText(text);
+        let text = e.currentTarget.value;
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text});
     }
-    // let newPostEl = React.createRef<HTMLTextAreaElement>();
-    let text = '';
+
     return (
         <div className={classes.content}>
             <h3>My Posts</h3>
