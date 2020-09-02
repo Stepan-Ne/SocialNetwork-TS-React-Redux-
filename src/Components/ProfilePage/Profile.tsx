@@ -28,13 +28,15 @@ function Profile(props: PropsProfileType) {
         <div className={classes.content}>
             <h3>My Posts</h3>
             <div>
-                <textarea onChange={onChangeHandler} value={props.state.newPostText}>i</textarea>
+                <textarea onChange={onChangeHandler}
+                          value={props.state.newPostText}>i</textarea>
             </div>
             <div>
                 <button onClick={(e) => onAddPostClick()}>Add Post</button>
             </div>
             <div>
-                {props.state.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)}
+                {props.state.posts.map(p => <Post message={p.message}
+                                                  likesCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>
     )

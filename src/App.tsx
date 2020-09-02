@@ -17,6 +17,7 @@ type DialogsPersonsType = {
     name: string
 }
 export type DialogsDataType = {
+    newMessageText: string
     dialogsPersons: Array<DialogsPersonsType>
     dialogsMessages: Array<DialogsMessagesType>
 }
@@ -56,7 +57,9 @@ const App: React.FC<PropsType> = (props) => {
                         state={props.state.profilePage}
                         dispatch={props.dispatch}/>}/>
                     <Route path="/users" component={Users}/>
-                    <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs
+                        state={props.state.dialogsPage}
+                        dispatch={props.dispatch}/>}/>
                 </div>
 
             </div>

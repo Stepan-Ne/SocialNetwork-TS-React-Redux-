@@ -3,20 +3,25 @@ import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsDataType} from "../../App";
+import {sendMessageAC, updateMesageAC} from "../../Redux/state";
 
-
+type ActionType = {
+    type: string
+    newText?: any
+}
 type PropsDialogsType = {
     state: DialogsDataType
+    dispatch: (action: ActionType) => void
 }
 //COMPONENT
 const Dialogs: React.FC<PropsDialogsType> = (props) => {
 
     function sendMessage() {
-        alert(txt)
+        props.dispatch(sendMessageAC());
     }
-    let txt = '';
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
-        txt = e.currentTarget.value;
+        let txt = e.currentTarget.value;
+        props.dispatch(updateMesageAC(txt));
     }
 
     return (
@@ -28,7 +33,8 @@ const Dialogs: React.FC<PropsDialogsType> = (props) => {
                 {props.state.dialogsMessages.map(m =>  <Message message={m.message}/>)}
             </div>
             <div>
-                <textarea onChange={onChangeHandler}></textarea>
+                <textarea value={props.state.newMessageText}
+                          onChange={onChangeHandler}></textarea>
                 <div>
                     <button onClick={sendMessage}>Send Message</button>
                 </div>
@@ -36,6 +42,6 @@ const Dialogs: React.FC<PropsDialogsType> = (props) => {
 
         </div>
     )
-}
+};
 
 export default Dialogs;

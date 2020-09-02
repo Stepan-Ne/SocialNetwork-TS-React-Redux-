@@ -1,6 +1,8 @@
 import {ActionType} from "../App";
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY";
+const SEND_MESSAGE = "SEND_MESSAGE";
 
 let store = {
     _state: {
@@ -13,6 +15,7 @@ let store = {
 
         },
         dialogsPage: {
+            newMessageText: "",
             dialogsPersons: [
                 {id: "1", name: "Luba"},
                 {id: "2", name: "Olga"},
@@ -36,14 +39,22 @@ let store = {
         this._callsubscriber = observer;
     },
     dispatch(action: ActionType) {
-        if (action.type === "UPDATE-NEW-POST-TEXT") {
+        if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callsubscriber(this._state);
-        } else if(action.type === "ADD-POST") {
+        } else if(action.type === ADD_POST) {
             this._state.profilePage.posts.push(
                 {id: "3", message: this._state.profilePage.newPostText, likesCount: "0"}
             );
             this._state.profilePage.newPostText = "";
+            this._callsubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._callsubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let message = {message: this._state.dialogsPage.newMessageText};
+            this._state.dialogsPage.dialogsMessages.push(message);
+            this._state.dialogsPage.newMessageText = "";
             this._callsubscriber(this._state);
         }
     }
@@ -52,7 +63,9 @@ let store = {
 
 
 export const addPostAC = () => ({type: ADD_POST});
-export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const sendMessageAC = () => ({type: SEND_MESSAGE});
+export const updateMesageAC = (text: string) => ({type: UPDATE_NEW_MESSAGE_BODY, newText: text});
 export default store;
 // addPost() {
 //     this._state.profilePage.posts.push(
