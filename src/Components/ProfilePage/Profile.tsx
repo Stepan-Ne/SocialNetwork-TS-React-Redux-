@@ -2,13 +2,13 @@
 import React, {ChangeEvent} from 'react';
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
-import {ActionType, ProfilePageType} from "../../App";
-import {addPostAC, updateNewPostTextAC} from "../../Redux/state";
+import {ProfilePageType} from "../../App";
+import {ActionTypesPrifile, addPostAC, updateNewPostTextAC} from "../../Redux/state";
 
 
 type PropsProfileType = {
     state: ProfilePageType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionTypesPrifile) => void
 }
 
 

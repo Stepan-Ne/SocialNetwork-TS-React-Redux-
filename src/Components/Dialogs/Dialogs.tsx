@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsDataType} from "../../App";
-import {sendMessageAC, updateMesageAC} from "../../Redux/state";
+import {ActionTypesDialog, sendMessageAC, updateMesageAC} from "../../Redux/state";
 
 type ActionType = {
     type: string
@@ -11,7 +11,7 @@ type ActionType = {
 }
 type PropsDialogsType = {
     state: DialogsDataType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionTypesDialog) => void
 }
 //COMPONENT
 const Dialogs: React.FC<PropsDialogsType> = (props) => {

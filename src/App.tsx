@@ -7,6 +7,7 @@ import {Nav} from "./Components/Navbar/Nav";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {v1} from "uuid";
 import Dialogs from "./Components/Dialogs/Dialogs";
+import {ActionTypes} from "./Redux/state";
 
 //TYPE for Dialogs
 type DialogsMessagesType = {
@@ -42,7 +43,7 @@ export type ActionType = {
 }
 type PropsType = {
     state: StatePropsType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
