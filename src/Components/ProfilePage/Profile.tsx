@@ -1,9 +1,9 @@
-
 import React, {ChangeEvent} from 'react';
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
 import {ProfilePageType} from "../../App";
-import {ActionTypesPrifile, addPostAC, updateNewPostTextAC} from "../../Redux/state";
+import {ActionTypesPrifile} from "../../Redux/state";
+import {addPostAC, updateNewPostTextAC} from "../../Redux/profileReducer";
 
 
 type PropsProfileType = {
@@ -16,9 +16,10 @@ type PropsProfileType = {
 function Profile(props: PropsProfileType) {
 
     function onAddPostClick() {
-       props.dispatch(addPostAC());
-       props.state.newPostText = '';
+        props.dispatch(addPostAC());
+        props.state.newPostText = '';
     }
+
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
         let text = e.currentTarget.value;
         props.dispatch(updateNewPostTextAC(text));
