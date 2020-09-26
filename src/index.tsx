@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App, {StatePropsType} from './App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import store from './Redux/state';
+import store, {RootState} from './Redux/redux-store';
 
 
 
-let rerenderTree = (state: StatePropsType) => {
+let rerenderTree = (state: RootState) => {
     ReactDOM.render(
         <React.StrictMode>
             <App state={state} dispatch={store.dispatch.bind(store)}/>
@@ -15,8 +15,8 @@ let rerenderTree = (state: StatePropsType) => {
         document.getElementById('root')
     );
 };
-rerenderTree(store.getState());
-store.subscribe(rerenderTree);
+rerenderTree(store.getState()); 
+store.subscribe(() => rerenderTree(store.getState()));
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App state={state} />

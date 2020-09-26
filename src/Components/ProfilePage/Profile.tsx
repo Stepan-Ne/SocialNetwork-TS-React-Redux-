@@ -1,14 +1,15 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, Dispatch} from 'react';
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
-import {ProfilePageType} from "../../App";
-import {ActionTypesPrifile} from "../../Redux/state";
-import {addPostAC, updateNewPostTextAC} from "../../Redux/profileReducer";
+// import {ProfilePageType} from "../../App";
+// import {ActionTypesProfile} from "../../Redux/store";
+import {addPostAC, ProfilePageType, updateNewPostTextAC} from "../../Redux/profileReducer";
+import {RootState} from "../../Redux/redux-store";
 
 
 type PropsProfileType = {
-    state: ProfilePageType
-    dispatch: (action: ActionTypesPrifile) => void
+    state: RootState
+    dispatch: any
 }
 
 
@@ -17,7 +18,7 @@ function Profile(props: PropsProfileType) {
 
     function onAddPostClick() {
         props.dispatch(addPostAC());
-        props.state.newPostText = '';
+        props.state.profilePage.newPostText = '';
     }
 
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
@@ -30,13 +31,13 @@ function Profile(props: PropsProfileType) {
             <h3>My Posts</h3>
             <div>
                 <textarea onChange={onChangeHandler}
-                          value={props.state.newPostText}>i</textarea>
+                          value={props.state.profilePage.newPostText}>i</textarea>
             </div>
             <div>
                 <button onClick={(e) => onAddPostClick()}>Add Post</button>
             </div>
             <div>
-                {props.state.posts.map(p => <Post message={p.message}
+                {props.state.profilePage.posts.map(p => <Post message={p.message}
                                                   likesCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>

@@ -2,9 +2,9 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsDataType} from "../../App";
-import {ActionTypesDialog} from "../../Redux/state";
-import {sendMessageAC, updateMesageAC} from "../../Redux/dialogsReducer";
+// import {DialogsDataType} from "../../App";
+// import {ActionTypesDialog} from "../../Redux/store";
+import {DialogsDataType, sendMessageAC, updateMesageAC} from "../../Redux/dialogsReducer";
 
 type ActionType = {
     type: string
@@ -12,7 +12,7 @@ type ActionType = {
 }
 type PropsDialogsType = {
     state: DialogsDataType
-    dispatch: (action: ActionTypesDialog) => void
+    dispatch: any
 }
 //COMPONENT
 const Dialogs: React.FC<PropsDialogsType> = (props) => {

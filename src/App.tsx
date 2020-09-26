@@ -7,43 +7,25 @@ import {Nav} from "./Components/Navbar/Nav";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {v1} from "uuid";
 import Dialogs from "./Components/Dialogs/Dialogs";
-import {ActionTypes} from "./Redux/state";
+import { RootState } from './Redux/redux-store';
+// import {dispatchApp} from "./Redux/redux-store";
+// import {ActionTypes} from "./Redux/store";
 
-//TYPE for Dialogs
-type DialogsMessagesType = {
-    message: string
-}
-type DialogsPersonsType = {
-    id: string
-    name: string
-}
-export type DialogsDataType = {
-    newMessageText: string
-    dialogsPersons: Array<DialogsPersonsType>
-    dialogsMessages: Array<DialogsMessagesType>
-}
-//TYPE for Posts
-export type PostTypeElement = {
-    id: string
-    message: string
-    likesCount: string
-}
-export type ProfilePageType = {
-    newPostText: string
-    posts: Array<PostTypeElement>
-}
-//TYPE of STATE
-export type StatePropsType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsDataType
-}
-export type ActionType = {
-    type: string
-    newText?: any
-}
+
+
+// //TYPE of STATE
+// export type StatePropsType = {
+//     profilePage: ProfilePageType
+//     dialogsPage: DialogsDataType
+// }
+// export type ActionType = {
+//     type: string
+//     newText?: any
+// }
+//
 type PropsType = {
-    state: StatePropsType
-    dispatch: (action: ActionTypes) => void
+    state: RootState
+    dispatch: any
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -55,7 +37,7 @@ const App: React.FC<PropsType> = (props) => {
                 <Nav/>
                 <div className="content">
                     <Route path="/profile" render={() => <Profile
-                        state={props.state.profilePage}
+                        state={props.state}
                         dispatch={props.dispatch}/>}/>
                     <Route path="/users" component={Users}/>
                     <Route path="/dialogs" render={() => <Dialogs
