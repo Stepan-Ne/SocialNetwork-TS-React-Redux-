@@ -1,5 +1,3 @@
-// import {ActionTypes} from "./store";
-
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY";
 const SEND_MESSAGE = "SEND_MESSAGE";
@@ -40,8 +38,10 @@ export type ActionSendMessageTypes =
 const dialogsReducer = (state = initialState, action: ActionSendMessageTypes,): DialogsDataType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageText = action.newessageText;
-            return state;
+            return {
+                ...state,
+                newMessageText: action.newessageText
+            };
         case SEND_MESSAGE:
             let message = {message: state.newMessageText};
             state.dialogsMessages.push(message);

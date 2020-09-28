@@ -1,6 +1,6 @@
 import {createStore, combineReducers} from "redux";
-import profileReducer, {ProfileReducerType} from "./profileReducer";
-import dialogsReducer, {DialogsReducerType} from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 // export type dispatchApp = typeof store.dispatch;
 
@@ -12,6 +12,6 @@ export type RootState = ReturnType<typeof reducers>
 
 let store = createStore(reducers);
 
-
+export type StoreType = typeof store;
 
 export default store;

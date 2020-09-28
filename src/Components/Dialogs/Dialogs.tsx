@@ -2,28 +2,25 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-// import {DialogsDataType} from "../../App";
-// import {ActionTypesDialog} from "../../Redux/store";
-import {DialogsDataType, sendMessageAC, updateMesageAC} from "../../Redux/dialogsReducer";
+import {DialogsDataType} from "../../Redux/dialogsReducer";
 
-type ActionType = {
-    type: string
-    newText?: any
-}
 type PropsDialogsType = {
     state: DialogsDataType
-    dispatch: any
+    onChangeMessage: (txt: string) => void
+    onSendMessage: () => void;
 }
 //COMPONENT
 const Dialogs: React.FC<PropsDialogsType> = (props) => {
 
     function sendMessage() {
-        props.dispatch(sendMessageAC());
+        props.onSendMessage();
+        // props.dispatch(sendMessageAC());
     }
 
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
         let txt = e.currentTarget.value;
-        props.dispatch(updateMesageAC(txt));
+        props.onChangeMessage(txt);
+        // props.dispatch(updateMesageAC(txt));
     }
 
     return (

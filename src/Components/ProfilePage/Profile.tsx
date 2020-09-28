@@ -1,15 +1,12 @@
 import React, {ChangeEvent, Dispatch} from 'react';
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
-// import {ProfilePageType} from "../../App";
-// import {ActionTypesProfile} from "../../Redux/store";
-import {addPostAC, ProfilePageType, updateNewPostTextAC} from "../../Redux/profileReducer";
-import {RootState} from "../../Redux/redux-store";
-
+import { ProfilePageType } from "../../Redux/profileReducer";
 
 type PropsProfileType = {
-    state: RootState
-    dispatch: any
+    state: ProfilePageType
+    onAddPost: () => void
+    onChangePost: (text: string) => void
 }
 
 
@@ -17,31 +14,33 @@ type PropsProfileType = {
 function Profile(props: PropsProfileType) {
 
     function onAddPostClick() {
-        props.dispatch(addPostAC());
-        props.state.profilePage.newPostText = '';
-    }
+        props.onAddPost();
+        // props.dispatch(addPostAC());
+        // props.state.profilePage.newPostText = '';
+    };
 
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
         let text = e.currentTarget.value;
-        props.dispatch(updateNewPostTextAC(text));
-    }
+        props.onChangePost(text);
+        // props.dispatch(updateNewPostTextAC(text));
+    };
 
     return (
         <div className={classes.content}>
             <h3>My Posts</h3>
             <div>
                 <textarea onChange={onChangeHandler}
-                          value={props.state.profilePage.newPostText}>i</textarea>
+                          value={props.state.newPostText}>i</textarea>
             </div>
             <div>
                 <button onClick={(e) => onAddPostClick()}>Add Post</button>
             </div>
             <div>
-                {props.state.profilePage.posts.map(p => <Post message={p.message}
+                {props.state.posts.map(p => <Post message={p.message}
                                                   likesCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Profile;

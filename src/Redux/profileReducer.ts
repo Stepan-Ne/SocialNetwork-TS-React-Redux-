@@ -1,5 +1,3 @@
-// import {ActionTypes} from "./store";
-import {sendMessageAC, updateMesageAC} from "./dialogsReducer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
