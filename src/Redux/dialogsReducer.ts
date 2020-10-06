@@ -31,11 +31,11 @@ let initialState: DialogsDataType = {
 };
 
 //ACTIONS TYPE
-export type ActionSendMessageTypes =
-    ReturnType<typeof sendMessageAC>
-    | ReturnType<typeof updateMesageAC>
+// export type ActionSendMessageTypes =
+//     ReturnType<typeof sendMessageAC>
+//     | ReturnType<typeof updateMesageAC>
 
-const dialogsReducer = (state = initialState, action: ActionSendMessageTypes,): DialogsDataType => {
+const dialogsReducer = (state = initialState, action: MessageActionTypes,): DialogsDataType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             return {
@@ -52,17 +52,20 @@ const dialogsReducer = (state = initialState, action: ActionSendMessageTypes,): 
     }
 };
 
-interface SendMessageAction {
+//TYPE of AC
+type SendMessageAction = {
     type: typeof SEND_MESSAGE
 }
-interface UndateMessageAction {
+type UndateMessageAction = {
     type: typeof UPDATE_NEW_MESSAGE_BODY
     newessageText: string
 }
 export type MessageActionTypes = SendMessageAction | UndateMessageAction;
 
-export type DialogsReducerType = ReturnType<typeof dialogsReducer>
+// export type DialogsReducerType = ReturnType<typeof dialogsReducer>
 
+
+//ACTIOS CREATORS
 export const sendMessageAC = (): MessageActionTypes => ({type: SEND_MESSAGE} as const);
 
 export const updateMesageAC = (text: string): MessageActionTypes => {
