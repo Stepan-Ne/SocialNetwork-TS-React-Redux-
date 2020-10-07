@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Dispatch} from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from "./ProfilePage.module.css";
 import {Post} from "./Post/Post";
 import { ProfilePageType } from "../../Redux/profileReducer";
