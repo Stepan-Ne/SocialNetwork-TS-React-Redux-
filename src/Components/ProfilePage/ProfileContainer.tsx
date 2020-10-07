@@ -1,29 +1,26 @@
 import React, {ChangeEvent, Dispatch} from 'react';
-import {addPostAC, ProfilePageType, updateNewPostTextAC} from "../../Redux/profileReducer";
-import {RootState, StoreType} from "../../Redux/redux-store";
+import {addPostAC, MessageActionTypes, updateNewPostTextAC} from "../../Redux/profileReducer";
+import {RootState} from "../../Redux/redux-store";
 import Profile from "./Profile";
+import {connect} from "react-redux";
 
 
-type PropsProfileType = {
-    store: StoreType
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+function mapDispatchToProps(dispatch: Dispatch<MessageActionTypes>) {
+    return {
+        onChangePost: (text: string) => {
+            dispatch(updateNewPostTextAC(text));
+        },
+        onAddPost: () => {
+            dispatch(addPostAC());
+        }
+    }
 }
-
-
-//COMPONENT
-function ProfileContainer(props: PropsProfileType) {
-
-    let state = props.store.getState().profilePage;
-
-    function onAddPostClick() {
-        props.store.dispatch(addPostAC());
-        state.newPostText = '';
-    };
-
-    function onChangeHandler(text: string) {
-        props.store.dispatch(updateNewPostTextAC(text));
-    };
-
-    return <Profile state={state} onChangePost={onChangeHandler} onAddPost={onAddPostClick}/>
-};
+function mapStateToProps(state: RootState) {
+    return {
+        state: state.profilePage
+    }
+}
 
 export default ProfileContainer;

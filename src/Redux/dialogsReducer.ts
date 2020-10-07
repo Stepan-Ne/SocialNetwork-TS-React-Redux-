@@ -46,7 +46,7 @@ const dialogsReducer = (state = initialState, action: MessageActionTypes,): Dial
             let message = {message: state.newMessageText};
             state.dialogsMessages.push(message);
             state.newMessageText = "";
-            return state;
+            return {...state};
         default:
             return state;
     }

@@ -41,7 +41,7 @@ const profileReducer = (state= initialState, action: MessageActionTypes): Profil
             } else {
                 alert("Oups!")
             }
-            return state;
+            return {...state};
         default:
             return state;
     }
