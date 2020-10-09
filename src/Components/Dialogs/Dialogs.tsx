@@ -26,10 +26,10 @@ const Dialogs: React.FC<PropsDialogsType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.persons}>
-                {props.state.dialogsPersons.map(p => <DialogsItem name={p.name} id={p.id}/>)}
+                {props.state.dialogsPersons.map(p => <DialogsItem name={p.name} key={p.id} id={p.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.state.dialogsMessages.map(m => <Message message={m.message}/>)}
+                {props.state.dialogsMessages.map(m => <Message key={m.id} message={m.message}/>)}
             </div>
             <div>
                 <textarea value={props.state.newMessageText}

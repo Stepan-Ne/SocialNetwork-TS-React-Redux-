@@ -5,6 +5,7 @@ const SEND_MESSAGE = "SEND_MESSAGE";
 //TYPE for Dialogs
 type DialogsMessagesType = {
     message: string
+    id: string
 }
 type DialogsPersonsType = {
     id: string
@@ -24,9 +25,9 @@ let initialState: DialogsDataType = {
         {id: "3", name: "Misha"},
     ],
     dialogsMessages: [
-        {message: "Hi, Dear!"},
-        {message: "Ho do you do?"},
-        {message: "How are you?"}
+        {message: "Hi, Dear!", id: "1"},
+        {message: "Ho do you do?", id: "2"},
+        {message: "How are you?", id: "3"}
     ]
 };
 
@@ -43,10 +44,12 @@ const dialogsReducer = (state = initialState, action: MessageActionTypes,): Dial
                 newMessageText: action.newessageText
             };
         case SEND_MESSAGE:
-            let message = {message: state.newMessageText};
-            state.dialogsMessages.push(message);
-            state.newMessageText = "";
-            return {...state};
+            return {
+                ...state,
+                newMessageText: "",
+                dialogsMessages: [...state.dialogsMessages, 
+                    {message: state.newMessageText, id: "4"}]
+            };
         default:
             return state;
     }

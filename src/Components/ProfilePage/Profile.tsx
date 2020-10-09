@@ -36,7 +36,7 @@ function Profile(props: PropsProfileType) {
                 <button onClick={(e) => onAddPostClick()}>Add Post</button>
             </div>
             <div>
-                {props.state.posts.map(p => <Post message={p.message}
+                {props.state.posts.map(p => <Post message={p.message} key={p.id}
                                                   likesCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>

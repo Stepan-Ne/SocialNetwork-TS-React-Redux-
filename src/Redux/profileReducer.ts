@@ -23,25 +23,24 @@ let initialState: ProfilePageType = {
 //     ReturnType<typeof addPostAC>
 //     | ReturnType<typeof updateNewPostTextAC>
 
-const profileReducer = (state= initialState, action: MessageActionTypes): ProfilePageType => {
+const profileReducer = (state = initialState, action: MessageActionTypes): ProfilePageType => {
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT:
-            // state.newPostText = action.newPostText;
-
             return {
                 ...state,
                 newPostText: action.newPostText
             };
         case ADD_POST:
             if (state.newPostText.trim()) {
-                state.posts.push(
-                    {id: "3", message: state.newPostText, likesCount: "0"}
-                );
-                state.newPostText = "";
-            } else {
+                return {
+                    ...state,
+                    newPostText: "",
+                    posts: [...state.posts,
+                        {id: "3", message: state.newPostText, likesCount: "0"} ]
+                }
+             } else {
                 alert("Oups!")
-            }
-            return {...state};
+            };
         default:
             return state;
     }
