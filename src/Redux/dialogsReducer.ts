@@ -65,7 +65,7 @@ export type MessageActionTypes = SendMessageAction | UndateMessageAction;
 // export type DialogsReducerType = ReturnType<typeof dialogsReducer>
 
 
-//ACTIOS CREATORS
+//ACTION CREATORS
 export const sendMessageAC = (): MessageActionTypes => ({type: SEND_MESSAGE} as const);
 
 export const updateMesageAC = (text: string): MessageActionTypes => {
