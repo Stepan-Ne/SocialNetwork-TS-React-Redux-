@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Dispatch} from 'react';
+import React, {Dispatch} from 'react';
 import {addPostAC, MessageActionTypes, updateNewPostTextAC} from "../../Redux/profileReducer";
 import {RootState} from "../../Redux/redux-store";
 import Profile from "./Profile";

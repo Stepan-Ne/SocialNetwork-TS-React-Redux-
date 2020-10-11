@@ -30,7 +30,7 @@ type UserType = {
     name: string
     location: LocationType
 }
-type UsersDataType = {
+export type UsersDataType = {
     users: UserType[]
 }
 
@@ -57,6 +57,8 @@ const usersReducer = (state = initialState, action: UserActionsType): UsersDataT
                        return u;
                    })
                };
+        case SET_USERS:
+            return {...state, users: [...state.users, ...action.users]};
         default:
             return state;
     }
@@ -66,6 +68,8 @@ const usersReducer = (state = initialState, action: UserActionsType): UsersDataT
 //ACTION CREATORS
 const FOLLOWED = "FOLLOWED";
 const UNFOLLOWED = "UNFOLLOWED";
+const SET_USERS = "SET_USERS";
+
 type FollowedAction = {
     type: typeof FOLLOWED
     id: string
@@ -74,8 +78,13 @@ type UnfollowedAction = {
     type: typeof UNFOLLOWED
     id: string
 }
-type UserActionsType = UnfollowedAction | FollowedAction;
-const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId});
-const unfollowedAC = (userId: string): UserActionsType => ({type: UNFOLLOWED, id: userId});
+type SetUsersAction = {
+    type: typeof SET_USERS
+    users: UserType[]
+}
+export type UserActionsType = UnfollowedAction | FollowedAction | SetUsersAction;
+export const setUsers = (users: UserType[]): SetUsersAction => ({type: SET_USERS, users})
+export const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId});
+export const unfollowedAC = (userId: string): UserActionsType => ({type: UNFOLLOWED, id: userId});
 
 export default usersReducer;

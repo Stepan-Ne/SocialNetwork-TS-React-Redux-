@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./Components/Header/Header";
-import {Users} from "./Components/Users/Users";
 import {Nav} from "./Components/Navbar/Nav";
 import {BrowserRouter, Route} from 'react-router-dom';
 import ProfileContainer from "./Components/ProfilePage/ProfileContainer";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 
 // type PropsType = {
@@ -24,7 +24,7 @@ const App = () => {
                 <div className="content">
                     <Route path="/profile" render={() => <ProfileContainer/>}/>
 
-                    <Route path="/users" component={Users}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
 
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                 </div>
