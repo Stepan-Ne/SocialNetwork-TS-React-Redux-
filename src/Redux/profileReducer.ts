@@ -24,6 +24,7 @@ let initialState: ProfilePageType = {
 //     | ReturnType<typeof updateNewPostTextAC>
 
 const profileReducer = (state = initialState, action: MessageActionTypes): ProfilePageType => {
+
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT:
             return {
@@ -63,6 +64,7 @@ export type MessageActionTypes = AddPostAction | UndatePostAction;
 export const addPostAC = (): MessageActionTypes => ({type: ADD_POST} as const);
 
 export const updateNewPostTextAC = (text: string): MessageActionTypes => {
+    debugger
     return {type: UPDATE_NEW_POST_TEXT, newPostText: text} as const};
 
 export default profileReducer;

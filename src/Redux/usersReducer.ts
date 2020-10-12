@@ -1,22 +1,11 @@
-
 let initialState: UsersDataType = {
     users: [
-        {id: "1", followed: true, name: "Michel", location: {
-            country: "Russia",
-            city: "Moscow"
-        }},
-        {id: "2", followed: false, name: "Olga", location: {
-            country: "Russia",
-            city: "Moscow"
-        }},
-        {id: "3", followed: true, name: "Luba", location: {
-            country: "Russia",
-            city: "Moscow"
-        }},
-        {id: "4", followed: false, name: "Stepan", location: {
-            country: "Russia",
-            city: "Moscow"
-        }},
+        {
+            id: "1", followed: true, name: "Michel", location: {
+                country: "Russia",
+                city: "Moscow"
+            }
+        },
     ]
 }
 
@@ -34,35 +23,36 @@ export type UsersDataType = {
     users: UserType[]
 }
 
-const usersReducer = (state = initialState, action: UserActionsType): UsersDataType => {
+const usersReducer = (state = initialState, action: UserActionsType):
+    UsersDataType => {
 
     switch (action.type) {
         case FOLLOWED:
-           return {
-               ...state,
-               users: state.users.map(u => {
-                   if (u.id === action.id) {
-                       u.followed = true;
-                   }
-                   return u;
-               })
-           };
-           case UNFOLLOWED:
-               return {
-                   ...state,
-                   users: state.users.map(u => {
-                       if (u.id === action.id) {
-                           u.followed = false;
-                       }
-                       return u;
-                   })
-               };
+            return {
+                ...state,
+                users: state.users.map(u => {
+                    if (u.id === action.id) {
+                        u.followed = true;
+                    }
+                    return u;
+                })
+            };
+        case UNFOLLOWED:
+            return {
+                ...state,
+                users: state.users.map(u => {
+                    if (u.id === action.id) {
+                        u.followed = false;
+                    }
+                    return u;
+                })
+            };
         case SET_USERS:
             return {...state, users: [...state.users, ...action.users]};
         default:
             return state;
     }
-}
+};
 
 
 //ACTION CREATORS
@@ -83,8 +73,11 @@ type SetUsersAction = {
     users: UserType[]
 }
 export type UserActionsType = UnfollowedAction | FollowedAction | SetUsersAction;
-export const setUsers = (users: UserType[]): SetUsersAction => ({type: SET_USERS, users})
-export const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId});
-export const unfollowedAC = (userId: string): UserActionsType => ({type: UNFOLLOWED, id: userId});
+
+export const setUsers = (users: UserType[]): SetUsersAction => ({type: SET_USERS, users} as const)
+export const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId} as const);
+export const unfollowedAC = (userId: string): UserActionsType => {
+    debugger
+    return {type: UNFOLLOWED, id: userId} as const};
 
 export default usersReducer;
