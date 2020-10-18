@@ -1,11 +1,11 @@
 let initialState: UsersDataType = {
     users: [
-        {
-            id: "1", followed: true, name: "Michel", location: {
-                country: "Russia",
-                city: "Moscow"
-            }
-        },
+        // {
+        //     id: "1", followed: true, name: "Michel", location: {
+        //         country: "Russia",
+        //         city: "Moscow"
+        //     }
+        // },
     ]
 }
 
@@ -24,7 +24,7 @@ export type UsersDataType = {
 }
 
 const usersReducer = (state = initialState, action: UserActionsType):
-    UsersDataType => {
+    UsersDataType | [] => {
 
     switch (action.type) {
         case FOLLOWED:
