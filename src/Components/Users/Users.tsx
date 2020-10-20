@@ -25,61 +25,41 @@ type ResponseUsersType = {
     "items": Array<UserType>
 }
 
-export function Users(props: UsersPropsType) {
+class Users extends React.Component<UsersPropsType, ResponseUsersType> {
+    constructor(props: UsersPropsType) {
+        super(props);
 
-
-    function setUsersClick() {
-        if (props.users.users.length === 0) {
+        if (this.props.users.users.length === 0) {
             axios.get<ResponseUsersType>("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => {
-                props.setUsers(response.data.items)
-            })
-            // props.setUsers([
-            //     {
-            //         id: "2", followed: false, name: "Olga", location: {
-            //             country: "Russia",
-            //             city: "Moscow"
-            //         }
-            //     },
-            //     {
-            //         id: "3", followed: true, name: "Luba", location: {
-            //             country: "Russia",
-            //             city: "Moscow"
-            //         }
-            //     },
-            //     {
-            //         id: "4", followed: false, name: "Stepan", location: {
-            //             country: "Russia",
-            //             city: "Moscow"
-            //         }
-            //     },
-            // ])
+                    this.props.setUsers(response.data.items)
+                })
         }
     }
 
+    render() {
+        return (
+            <div>
+                {this.props.users.users.map(u => {
+                    return <div className={s.userBlock} key={u.id}>
+                        <div className={s.userInfo}>
+                            <p>{u.name}</p>
+                            <p><span>{"u.location.country"}</span>,
+                                <span>{"u.location.city"}</span></p>
 
-    function unfollow(userId: string) {
-        props.unfollow(userId);
+                            {u.followed
+                                ? <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button>
+                                : <button onClick={() => this.props.follow(u.id)}>Follow</button>}
+
+                        </div>
+                        <div className={s.userLogo}>
+                            <img src={userImage} alt="logo"/>
+                        </div>
+                    </div>
+                })}
+            </div>
+        )
     }
-
-    return (
-
-        <div>
-            <button onClick={setUsersClick}>Set users</button>
-            {props.users.users.map(u => {
-                return <div className={s.userBlock} key={u.id}>
-                    <div className={s.userInfo}>
-                        <p>{u.name}</p>
-                        <p><span>{"u.location.country"}</span>, <span>{"u.location.city"}</span></p>
-                        {u.followed
-                            ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
-                            : <button onClick={() => props.follow(u.id)}>Follow</button>}
-                    </div>
-                    <div className={s.userLogo}>
-                        <img src={userImage} alt="logo"/>
-                    </div>
-                </div>
-            })}
-        </div>
-    )
 }
+
+export default Users;

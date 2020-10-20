@@ -1,12 +1,5 @@
 let initialState: UsersDataType = {
-    users: [
-        // {
-        //     id: "1", followed: true, name: "Michel", location: {
-        //         country: "Russia",
-        //         city: "Moscow"
-        //     }
-        // },
-    ]
+    users: []
 }
 
 type LocationType = {
