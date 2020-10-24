@@ -74,4 +74,6 @@ export const sendMessageAC = (): MessageActionTypes => ({type: SEND_MESSAGE} as 
 export const updateMesageAC = (text: string): MessageActionTypes => {
    return {type: UPDATE_NEW_MESSAGE_BODY, newessageText: text} as const};
 
+
+
 export default dialogsReducer;

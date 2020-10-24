@@ -4,6 +4,7 @@ import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsDataType} from "../../Redux/dialogsReducer";
 
+
 type PropsDialogsType = {
     state: DialogsDataType
     onChangeMessage: (txt: string) => void
@@ -20,7 +21,7 @@ const Dialogs: React.FC<PropsDialogsType> = (props) => {
     function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
         let txt = e.currentTarget.value;
         props.onChangeMessage(txt);
-        // props.dispatch(updateMesageAC(txt));
+        // props.dispatch(updateMessageAC(txt));
     }
 
     return (
@@ -33,7 +34,7 @@ const Dialogs: React.FC<PropsDialogsType> = (props) => {
             </div>
             <div>
                 <textarea value={props.state.newMessageText}
-                          onChange={onChangeHandler}></textarea>
+    onChange={onChangeHandler}/>
                 <div>
                     <button onClick={sendMessage}>Send Message</button>
                 </div>
