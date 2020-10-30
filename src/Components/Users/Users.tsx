@@ -1,29 +1,20 @@
 import React from "react";
-import {UsersDataType} from "../../Redux/usersReducer";
+import {UsersDataType, UserType} from "../../Redux/usersReducer";
 import s from "./Users.module.css";
 import userImage from "./../../img/user.png"
 import axios from "axios"
-import {debuglog} from "util";
 
 type UsersPropsType = {
     users: UsersDataType
     follow: (userId: string) => void
     unfollow: (userId: string) => void
-    setUsers: (users: any) => void
+    setUsers: (users: UserType[]) => void
 }
-type UserType = {
-    "name": string
-    "id": number
-    "uniqueUrlName": null,
-    "photos": {
-        "small": null,
-        "large": null
-    },
-    "status": null,
-    "followed": boolean
-}
+
 type ResponseUsersType = {
     "items": Array<UserType>
+    "totalCount": string,
+    "error": null
 }
 
 class Users extends React.Component<UsersPropsType, ResponseUsersType> {
@@ -32,6 +23,7 @@ class Users extends React.Component<UsersPropsType, ResponseUsersType> {
         if (this.props.users.users.length === 0) {
             axios.get<ResponseUsersType>("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => {
+                  //  console.log(response.data.items) //UserType[]
                     this.props.setUsers(response.data.items)
                 })
         }

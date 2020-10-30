@@ -2,10 +2,10 @@ let initialState: UsersDataType = {
     users: []
 }
 
-type LocationType = {
-    country: string
-    city: string
-}
+// type LocationType = {
+//     country: string
+//     city: string
+// }
 export type UserType = {
     "name": string
     "id": string

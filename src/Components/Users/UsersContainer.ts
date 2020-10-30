@@ -5,6 +5,7 @@ import {Dispatch} from "react";
 import {followedAC, setUsers, unfollowedAC, UserActionsType, UserType} from "../../Redux/usersReducer";
 
 const mapStateToProps = (state: RootState) => {
+    console.log(state)
     return {
         users: state.usersPage
     }
