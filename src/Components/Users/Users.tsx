@@ -3,6 +3,7 @@ import {UsersDataType} from "../../Redux/usersReducer";
 import s from "./Users.module.css";
 import userImage from "./../../img/user.png"
 import axios from "axios"
+import {debuglog} from "util";
 
 type UsersPropsType = {
     users: UsersDataType

@@ -6,11 +6,16 @@ type LocationType = {
     country: string
     city: string
 }
-type UserType = {
-    id: string
-    followed: boolean
-    name: string
-    location: LocationType
+export type UserType = {
+    "name": string
+    "id": string
+    "uniqueUrlName": null,
+    "photos": {
+        "small": null,
+        "large": null
+    },
+    "status": null,
+    "followed": boolean
 }
 export type UsersDataType = {
     users: UserType[]
@@ -18,6 +23,7 @@ export type UsersDataType = {
 
 const usersReducer = (state = initialState, action: UserActionsType):
     UsersDataType | [] => {
+    //console.log(state)
 
     switch (action.type) {
         case FOLLOWED:
@@ -67,7 +73,7 @@ type SetUsersAction = {
 }
 export type UserActionsType = UnfollowedAction | FollowedAction | SetUsersAction;
 
-export const setUsers = (users: UserType[]): SetUsersAction => ({type: SET_USERS, users} as const)
+export const setUsers = (users: UserType[]): {type: typeof SET_USERS, users: UserType[]} => ({type: SET_USERS, users} as const)
 export const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId} as const);
 export const unfollowedAC = (userId: string): UserActionsType => {
     debugger
