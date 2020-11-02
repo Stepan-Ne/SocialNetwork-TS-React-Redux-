@@ -5,14 +5,11 @@ import {Nav} from "./Components/Navbar/Nav";
 import {BrowserRouter, Route} from 'react-router-dom';
 import ProfileContainer from "./Components/ProfilePage/ProfileContainer";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import UsersContainer from "./Components/Users/UsersContainer";
+import UsersContainerConnect from "./Components/Users/UsersContainerConnect";
 
 
-// type PropsType = {
-//     store: StoreType
-//     state: RootState
-//     dispatch: any
-// }
+
+
 
 const App = () => {
 
@@ -24,7 +21,7 @@ const App = () => {
                 <div className="content">
                     <Route path="/profile" render={() => <ProfileContainer/>}/>
 
-                    <Route path="/users" render={() => <UsersContainer/>}/>
+                    <Route path="/users" render={() => <UsersContainerConnect/>}/>
 
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                 </div>
