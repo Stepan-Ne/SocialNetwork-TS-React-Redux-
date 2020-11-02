@@ -16,3 +16,6 @@
     width: auto;
 
 }
+.selectedPage {
+    background-color: yellowgreen;
+}

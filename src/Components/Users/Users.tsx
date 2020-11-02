@@ -1,5 +1,5 @@
 import React from "react";
-import {UsersDataType} from "../../Redux/usersReducer";
+import {UsersDataType, UserType} from "../../Redux/usersReducer";
 import s from "./Users.module.css";
 import userImage from "./../../img/user.png"
 import axios from "axios"
@@ -8,38 +8,51 @@ type UsersPropsType = {
     users: UsersDataType
     follow: (userId: string) => void
     unfollow: (userId: string) => void
-    setUsers: (users: any) => void
+    setUsers: (users: UserType[]) => void
+    changePage: (page: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
 }
-type UserType = {
-    "name": string
-    "id": number
-    "uniqueUrlName": null,
-    "photos": {
-        "small": null,
-        "large": null
-    },
-    "status": null,
-    "followed": boolean
-}
+
 type ResponseUsersType = {
     "items": Array<UserType>
+    "totalCount": string,
+    "error": null
 }
 
 class Users extends React.Component<UsersPropsType, ResponseUsersType> {
-    constructor(props: UsersPropsType) {
-        super(props);
 
-        if (this.props.users.users.length === 0) {
-            axios.get<ResponseUsersType>("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                })
-        }
+    componentDidMount() {
+        let pS = this.props.users.pageSize
+        let cP = this.props.users.currentPage
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pS}&page=${cP}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+
+            })
+    }
+
+    setPage = (p: number) => {
+        this.props.changePage(p)
+        let cP = this.props.users.currentPage
+        axios.get<ResponseUsersType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.users.pageSize}&page=${p}`)
+            .then(response => {
+                //  console.log(response.data.items) //UserType[]
+                this.props.setUsers(response.data.items)
+            })
     }
 
     render() {
+        let pageCount = Math.ceil(this.props.users.totalUsersCount / this.props.users.pageSize)
+        let pages = []
+        for (let i = 1; i < pageCount / 100; i++) {
+            pages.push(i)
+        }
         return (
             <div>
+                <div>{pages.map(p => <button key={p} onClick={() => this.setPage(p)}
+                                             className={this.props.users.currentPage === p ? s.selectedPage : ''}>{p}</button>)}
+                </div>
                 {this.props.users.users.map(u => {
                     return <div className={s.userBlock} key={u.id}>
                         <div className={s.userInfo}>
