@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Users.module.css";
 import userImage from "../../img/user.png";
 import {UsersDataType} from "../../Redux/usersReducer";
+import Preloader from "../Common/Preloader/Preloader";
 
 type UsersPropsT = {
     usersState: UsersDataType
@@ -26,12 +27,7 @@ const Users = (props: UsersPropsT) => {
                                          ? s.selectedPage : ''}>{p}</button>)}
         </div>
 
-        <div className={props.usersState.isFetching ? s.ldsEllipsis : ''}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        <Preloader isFetching={props.usersState.isFetching}/>
 
         {props.usersState.users.map(u => {
             return <div className={s.userBlock} key={u.id}>
