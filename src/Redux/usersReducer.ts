@@ -1,8 +1,9 @@
 let initialState: UsersDataType = {
     users: [],
     pageSize: 4,
-    totalUsersCount: 21,
-    currentPage: 1
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false
 };
 
 export type UserType = {
@@ -21,6 +22,7 @@ export type UsersDataType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 const usersReducer = (state = initialState, action: UserActionsType):
@@ -53,6 +55,11 @@ const usersReducer = (state = initialState, action: UserActionsType):
             return {...state, currentPage: action.page};
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.count};
+        case FETCHING:
+            return {
+                ...state,
+                isFetching: action.loading
+            }
         default:
             return state;
     }
@@ -65,6 +72,7 @@ const UNFOLLOWED = "UNFOLLOWED";
 const SET_USERS = "SET_USERS";
 const CHANGE_PAGE = "CHANGE_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+const FETCHING = 'FETCHING';
 
 type FollowedAction = {
     type: typeof FOLLOWED
@@ -86,12 +94,17 @@ type SetTotalUsersCount = {
     type: typeof SET_TOTAL_USERS_COUNT
     count: number
 }
+type Fetching = {
+    type: typeof FETCHING
+    loading: boolean
+}
 export type UserActionsType =
     UnfollowedAction
     | FollowedAction
     | SetUsersAction
     | changePageAction
-    | SetTotalUsersCount;
+    | SetTotalUsersCount
+    | Fetching;
 
 export const setUsersAC = (users: UserType[]): { type: typeof SET_USERS, users: UserType[] } => ({
     type: SET_USERS,
@@ -101,4 +114,6 @@ export const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED,
 export const unfollowedAC = (userId: string): UserActionsType => ({type: UNFOLLOWED, id: userId} as const);
 export const changePageAC = (page: number): changePageAction => ({type: CHANGE_PAGE, page});
 export const setTotalUsersCountAC = (count: number): SetTotalUsersCount => ({type: SET_TOTAL_USERS_COUNT, count});
+export const isFetchingAC = (loading: boolean): Fetching => ({type: FETCHING, loading});
+
 export default usersReducer;

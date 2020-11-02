@@ -4,7 +4,7 @@ import userImage from "../../img/user.png";
 import {UsersDataType} from "../../Redux/usersReducer";
 
 type UsersPropsT = {
-    users: UsersDataType
+    usersState: UsersDataType
     follow: (userId: string) => void
     unfollow: (userId: string) => void
     setPage: (p: number) => void
@@ -12,7 +12,7 @@ type UsersPropsT = {
 
 const Users = (props: UsersPropsT) => {
 
-    let pageCount = Math.ceil(props.users.totalUsersCount / props.users.pageSize);
+    let pageCount = Math.ceil(props.usersState.totalUsersCount / props.usersState.pageSize);
     let pages = [];
     for (let i = 1; i < pageCount / 100; i++) {
         pages.push(i)
@@ -22,10 +22,18 @@ const Users = (props: UsersPropsT) => {
 
         <div>{pages.map(p => <button key={p}
                                      onClick={() => props.setPage(p)}
-                                     className={props.users.currentPage === p ? s.selectedPage : ''}>
-                        {p}</button>)}
+                                     className={props.usersState.currentPage === p
+                                         ? s.selectedPage : ''}>{p}</button>)}
         </div>
-        {props.users.users.map(u => {
+
+        <div className={props.usersState.isFetching ? s.ldsEllipsis : ''}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        {props.usersState.users.map(u => {
             return <div className={s.userBlock} key={u.id}>
                 <div className={s.userInfo}>
                     <p>{u.name}</p>

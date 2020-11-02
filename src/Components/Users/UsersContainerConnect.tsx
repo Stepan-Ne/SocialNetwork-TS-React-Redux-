@@ -3,7 +3,7 @@ import {RootState} from "../../Redux/redux-store";
 import React, {Dispatch} from "react";
 import {
     changePageAC,
-    followedAC,
+    followedAC, isFetchingAC,
     setTotalUsersCountAC,
     setUsersAC,
     unfollowedAC,
@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import Users from "./Users";
 
+
 type UsersPropsType = {
     users: UsersDataType
     follow: (userId: string) => void
@@ -20,6 +21,7 @@ type UsersPropsType = {
     setUsers: (users: UserType[]) => void
     changePage: (page: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
+    isFetching: (loading: boolean) => void
 }
 
 type ResponseUsersType = {
@@ -27,14 +29,17 @@ type ResponseUsersType = {
     "totalCount": string,
     "error": null
 }
+
 //Container first level
 class UsersContainer extends React.Component<UsersPropsType, ResponseUsersType> {
 
     componentDidMount() {
+        this.props.isFetching(true);
         let pS = this.props.users.pageSize;
         let cP = this.props.users.currentPage;
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pS}&page=${cP}`)
             .then(response => {
+                this.props.isFetching(false);
                 this.props.setUsers(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount)
 
@@ -42,17 +47,19 @@ class UsersContainer extends React.Component<UsersPropsType, ResponseUsersType> 
     }
 
     setPage = (p: number) => {
+        this.props.isFetching(true);
         this.props.changePage(p);
         let cP = this.props.users.currentPage;
         axios.get<ResponseUsersType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.users.pageSize}&page=${p}`)
             .then(response => {
+                this.props.isFetching(false);
                 //  console.log(response.data.items) //UserType[]
                 this.props.setUsers(response.data.items)
             })
     }
 
     render() {
-        return <Users users={this.props.users}
+        return <Users usersState={this.props.users}
                       unfollow={this.props.unfollow}
                       follow={this.props.follow}
                       setPage={this.setPage}/>
@@ -79,6 +86,9 @@ const mapDispatchToProps = (dispatch: Dispatch<UserActionsType>) => {
         },
         setTotalUsersCount: (count: number) => {
             dispatch(setTotalUsersCountAC(count))
+        },
+        isFetching: (loading: boolean) => {
+            dispatch(isFetchingAC(loading))
         }
     }
 };
