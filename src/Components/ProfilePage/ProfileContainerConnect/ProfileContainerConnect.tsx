@@ -3,6 +3,7 @@ import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import MyPostsContainer from "../MyPostsContainer";
 import {connect} from "react-redux";
 import axios from "axios"
+import {setPofileInfo} from "../../../Redux/profileReducer";
 
 class ProfileContainer extends React.Component<any, any> {
 
@@ -10,6 +11,7 @@ class ProfileContainer extends React.Component<any, any> {
         axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
             .then(response => {
                 console.log(response.data)
+                this.props.setProfileInfo('d')
             })
     }
 
@@ -25,11 +27,11 @@ class ProfileContainer extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => {
     return {
-        profile: state.profilePage.profile
+        profile: ''
     }
 };
 
-const ProfileContainerConnect = connect(mapStateToProps, {})(ProfileContainer)
+const ProfileContainerConnect = connect(mapStateToProps, {setPofileInfo})(ProfileContainer);
 
 export default ProfileContainerConnect;
 

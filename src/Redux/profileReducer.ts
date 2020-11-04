@@ -1,6 +1,7 @@
 
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_PROFILE_INFO = 'SET_PROFILE_INFO';
 
 //TYPE for Posts
 export type PostTypeElement = {
@@ -11,7 +12,7 @@ export type PostTypeElement = {
 export type ProfilePageType = {
     posts: Array<PostTypeElement>
     newPostText: string
-    profile: any
+    profile: string
 }
 let initialState: ProfilePageType = {
     posts: [
@@ -19,7 +20,7 @@ let initialState: ProfilePageType = {
         {id: "2", message: "Nice to meet you!", likesCount: "10"},
     ],
     newPostText: "",
-    profile: null
+    profile: ""
 };
 // export type ActionAddPostTypes =
 //     ReturnType<typeof addPostAC>
@@ -44,6 +45,11 @@ const profileReducer = (state = initialState, action: MessageActionTypes): Profi
              } else {
                 alert("Oups!")
             };
+        case SET_PROFILE_INFO:
+            return {
+                ...state,
+               // profile: action
+            };
         default:
             return state;
     }
@@ -51,7 +57,7 @@ const profileReducer = (state = initialState, action: MessageActionTypes): Profi
 
 };
 
-
+//Types
 export type ProfileReducerType = ReturnType<typeof profileReducer>
 interface AddPostAction {
     type: typeof ADD_POST
@@ -60,13 +66,18 @@ interface UndatePostAction {
     type: typeof UPDATE_NEW_POST_TEXT
     newPostText: string
 }
-export type MessageActionTypes = AddPostAction | UndatePostAction;
+interface SetProfileInfoType {
+    type: typeof SET_PROFILE_INFO
+    profile: string
+}
+export type MessageActionTypes = AddPostAction | UndatePostAction | SetProfileInfoType;
 
-
-export const addPostAC = (): MessageActionTypes => ({type: ADD_POST} as const);
-
-export const updateNewPostTextAC = (text: string): MessageActionTypes => {
-    debugger
+//Actions
+export const addPostAC = (): AddPostAction => ({type: ADD_POST} as const);
+export const updateNewPostTextAC = (text: string): UndatePostAction => {
     return {type: UPDATE_NEW_POST_TEXT, newPostText: text} as const};
+export const setPofileInfo = (profile: string): SetProfileInfoType => {
+    return {type: SET_PROFILE_INFO, profile}
+};
 
 export default profileReducer;

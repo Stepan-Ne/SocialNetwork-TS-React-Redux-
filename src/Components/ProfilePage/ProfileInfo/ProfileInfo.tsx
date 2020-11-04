@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props: any) => {
     return (
         <div>
             Ava + Description
