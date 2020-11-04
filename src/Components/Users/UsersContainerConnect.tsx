@@ -2,11 +2,11 @@ import {connect} from "react-redux";
 import {RootState} from "../../Redux/redux-store";
 import React, {Dispatch} from "react";
 import {
-    changePageAC,
-    followedAC, isFetchingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowedAC,
+    changePage,
+    follow, isFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     UserActionsType, UsersDataType,
     UserType
 } from "../../Redux/usersReducer";
@@ -56,7 +56,7 @@ class UsersContainer extends React.Component<UsersPropsType, ResponseUsersType> 
                 //  console.log(response.data.items) //UserType[]
                 this.props.setUsers(response.data.items)
             })
-    }
+    };
 
     render() {
         return <Users usersState={this.props.users}
@@ -72,27 +72,34 @@ const mapStateToProps = (state: RootState) => {
         users: state.usersPage
     }
 };
-const mapDispatchToProps = (dispatch: Dispatch<UserActionsType>) => {
-    return {
-        follow: (userId: string) => dispatch(followedAC(userId)),
-        unfollow: (userId: string) => {
-            dispatch(unfollowedAC(userId))
-        },
-        setUsers: (users: UserType[]) => {
-            dispatch(setUsersAC(users))
-        },
-        changePage: (page: number) => {
-            dispatch(changePageAC(page))
-        },
-        setTotalUsersCount: (count: number) => {
-            dispatch(setTotalUsersCountAC(count))
-        },
-        isFetching: (loading: boolean) => {
-            dispatch(isFetchingAC(loading))
-        }
-    }
+// const mapDispatchToProps = (dispatch: Dispatch<UserActionsType>) => {
+//     return {
+//         follow: (userId: string) => dispatch(follow(userId)),
+//         unfollow: (userId: string) => {
+//             dispatch(unfollow(userId))
+//         },
+//         setUsers: (users: UserType[]) => {
+//             dispatch(setUsers(users))
+//         },
+//         changePage: (page: number) => {
+//             dispatch(changePage(page))
+//         },
+//         setTotalUsersCount: (count: number) => {
+//             dispatch(setTotalUsersCount(count))
+//         },
+//         isFetching: (loading: boolean) => {
+//             dispatch(isFetching(loading))
+//         }
+//     }
+// };
+const objForMapDispatch = {
+    changePage,
+    follow, isFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
 };
 
 
-const UsersContainerConnect = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+const UsersContainerConnect = connect(mapStateToProps, objForMapDispatch)(UsersContainer);
 export default UsersContainerConnect;

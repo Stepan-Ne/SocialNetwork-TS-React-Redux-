@@ -3,15 +3,16 @@ import s from "./Users.module.css";
 import userImage from "../../img/user.png";
 import {UsersDataType} from "../../Redux/usersReducer";
 import Preloader from "../Common/Preloader/Preloader";
+import { NavLink } from "react-router-dom";
 
-type UsersPropsT = {
+type UsersPropsType = {
     usersState: UsersDataType
     follow: (userId: string) => void
     unfollow: (userId: string) => void
     setPage: (p: number) => void
 }
 
-const Users = (props: UsersPropsT) => {
+const Users = (props: UsersPropsType) => {
 
     let pageCount = Math.ceil(props.usersState.totalUsersCount / props.usersState.pageSize);
     let pages = [];
@@ -27,7 +28,7 @@ const Users = (props: UsersPropsT) => {
                                          ? s.selectedPage : ''}>{p}</button>)}
         </div>
 
-        <Preloader isFetching={props.usersState.isFetching}/>
+        {props.usersState.isFetching ? <Preloader/> : null}
 
         {props.usersState.users.map(u => {
             return <div className={s.userBlock} key={u.id}>
@@ -42,7 +43,7 @@ const Users = (props: UsersPropsT) => {
 
                 </div>
                 <div className={s.userLogo}>
-                    <img src={userImage} alt="logo"/>
+                    <NavLink to={'/profile/' + u.id}><img src={userImage} alt="logo"/></NavLink>
                 </div>
             </div>
         })}

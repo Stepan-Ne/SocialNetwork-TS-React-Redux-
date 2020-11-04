@@ -1,12 +1,8 @@
 import React from "react";
-import s from "../../Users/Users.module.css";
+import s from "./Preloader.module.css";
 
-type PreloaderPropsType = {
-    isFetching: boolean
-}
-
-const  Preloader = (props: PreloaderPropsType) => {
-    return  <div className={props.isFetching ? s.ldsEllipsis : ''}>
+const  Preloader = () => {
+    return  <div className={s.ldsEllipsis}>
         <div></div>
         <div></div>
         <div></div>

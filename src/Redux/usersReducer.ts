@@ -106,14 +106,14 @@ export type UserActionsType =
     | SetTotalUsersCount
     | Fetching;
 
-export const setUsersAC = (users: UserType[]): { type: typeof SET_USERS, users: UserType[] } => ({
+export const setUsers = (users: UserType[]): { type: typeof SET_USERS, users: UserType[] } => ({
     type: SET_USERS,
     users
 } as const);
-export const followedAC = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId} as const);
-export const unfollowedAC = (userId: string): UserActionsType => ({type: UNFOLLOWED, id: userId} as const);
-export const changePageAC = (page: number): changePageAction => ({type: CHANGE_PAGE, page});
-export const setTotalUsersCountAC = (count: number): SetTotalUsersCount => ({type: SET_TOTAL_USERS_COUNT, count});
-export const isFetchingAC = (loading: boolean): Fetching => ({type: FETCHING, loading});
+export const follow = (userId: string): UserActionsType => ({type: FOLLOWED, id: userId} as const);
+export const unfollow = (userId: string): UserActionsType => ({type: UNFOLLOWED, id: userId} as const);
+export const changePage = (page: number): changePageAction => ({type: CHANGE_PAGE, page});
+export const setTotalUsersCount = (count: number): SetTotalUsersCount => ({type: SET_TOTAL_USERS_COUNT, count});
+export const isFetching = (loading: boolean): Fetching => ({type: FETCHING, loading});
 
 export default usersReducer;
