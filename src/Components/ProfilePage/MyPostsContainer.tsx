@@ -1,11 +1,11 @@
 import React, {Dispatch} from 'react';
 import {addPostAC, MessageActionTypes, updateNewPostTextAC} from "../../Redux/profileReducer";
 import {RootState} from "../../Redux/redux-store";
-import Profile from "./Profile";
+import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 function mapDispatchToProps(dispatch: Dispatch<MessageActionTypes>) {
     return {
@@ -23,4 +23,4 @@ function mapStateToProps(state: RootState) {
     }
 }
 
-export default ProfileContainer;
+export default MyPostsContainer;

@@ -3,9 +3,9 @@ import './App.css';
 import {Header} from "./Components/Header/Header";
 import {Nav} from "./Components/Navbar/Nav";
 import {BrowserRouter, Route} from 'react-router-dom';
-import ProfileContainer from "./Components/ProfilePage/ProfileContainer";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainerConnect from "./Components/Users/UsersContainerConnect";
+import ProfileContainerConnect from "./Components/ProfilePage/ProfileContainerConnect/ProfileContainerConnect";
 
 
 
@@ -19,7 +19,7 @@ const App = () => {
                 <Header/>
                 <Nav/>
                 <div className="content">
-                    <Route path="/profile" render={() => <ProfileContainer/>}/>
+                    <Route path="/profile" render={() => <ProfileContainerConnect/>}/>
 
                     <Route path="/users" render={() => <UsersContainerConnect/>}/>
 

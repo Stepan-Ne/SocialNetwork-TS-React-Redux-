@@ -11,6 +11,7 @@ export type PostTypeElement = {
 export type ProfilePageType = {
     posts: Array<PostTypeElement>
     newPostText: string
+    profile: any
 }
 let initialState: ProfilePageType = {
     posts: [
@@ -18,6 +19,7 @@ let initialState: ProfilePageType = {
         {id: "2", message: "Nice to meet you!", likesCount: "10"},
     ],
     newPostText: "",
+    profile: null
 };
 // export type ActionAddPostTypes =
 //     ReturnType<typeof addPostAC>

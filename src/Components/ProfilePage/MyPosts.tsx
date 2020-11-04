@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
-import classes from "./ProfilePage.module.css";
+import classes from './ProfilePage.module.css'
 import {Post} from "./Post/Post";
 import { ProfilePageType } from "../../Redux/profileReducer";
+
 
 type PropsProfileType = {
     state: ProfilePageType
@@ -11,7 +12,7 @@ type PropsProfileType = {
 
 
 //COMPONENT
-function Profile(props: PropsProfileType) {
+function MyPosts(props: PropsProfileType) {
 
     function onAddPostClick() {
         props.onAddPost();
@@ -27,6 +28,7 @@ function Profile(props: PropsProfileType) {
 
     return (
         <div className={classes.content}>
+
             <h3>My Posts</h3>
             <div>
                 <textarea onChange={onChangeHandler}
@@ -43,4 +45,4 @@ function Profile(props: PropsProfileType) {
     );
 };
 
-export default Profile;
+export default MyPosts;
