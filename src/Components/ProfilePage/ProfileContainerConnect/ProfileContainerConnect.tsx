@@ -3,35 +3,61 @@ import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import MyPostsContainer from "../MyPostsContainer";
 import {connect} from "react-redux";
 import axios from "axios"
-import {setPofileInfo} from "../../../Redux/profileReducer";
+import {setProfileInfo} from "../../../Redux/profileReducer";
 
-class ProfileContainer extends React.Component<any, any> {
+type ProfilePropsType = {
+    profile: ResponseProfileType
+    setProfileInfo: (profileData: ResponseProfileType) => void
+}
+export type ResponseProfileType = {
+    "aboutMe": string
+    "contacts": {
+        "facebook": string
+        "website": null,
+        "vk": string
+        "twitter": string
+        "instagram": string
+        "youtube": null,
+        "github": string
+        "mainLink": null
+    },
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": string
+    "fullName": string
+    "userId": number
+    "photos": {
+        "small": string
+        "large": string
+    }
+} | {}
+
+class ProfileContainer extends React.Component<ProfilePropsType, ResponseProfileType> {
 
     componentDidMount(): void {
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        axios.get<ResponseProfileType>('https://social-network.samuraijs.com/api/1.0/profile/2')
             .then(response => {
                 console.log(response.data)
-                this.props.setProfileInfo('d')
+                this.props.setProfileInfo(response.data)
             })
     }
 
     render() {
         return (
             <div>
-               <ProfileInfo/>
+               <ProfileInfo {...this.props}/>
                <MyPostsContainer/>
             </div>
         )
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ResponseProfileType) => {
     return {
-        profile: ''
+        profile: state
     }
 };
 
-const ProfileContainerConnect = connect(mapStateToProps, {setPofileInfo})(ProfileContainer);
+const ProfileContainerConnect = connect(mapStateToProps, {setProfileInfo})(ProfileContainer);
 
 export default ProfileContainerConnect;
 

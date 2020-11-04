@@ -3,7 +3,7 @@ import React from "react";
 const ProfileInfo = (props: any) => {
     return (
         <div>
-            Ava + Description
+            <img src={props.profile.photos.large} alt="userAva"/>
         </div>
     )
 };

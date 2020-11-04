@@ -1,3 +1,4 @@
+import {ResponseProfileType} from "../Components/ProfilePage/ProfileContainerConnect/ProfileContainerConnect";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -12,7 +13,7 @@ export type PostTypeElement = {
 export type ProfilePageType = {
     posts: Array<PostTypeElement>
     newPostText: string
-    profile: string
+    profileData: ResponseProfileType | {}
 }
 let initialState: ProfilePageType = {
     posts: [
@@ -20,7 +21,7 @@ let initialState: ProfilePageType = {
         {id: "2", message: "Nice to meet you!", likesCount: "10"},
     ],
     newPostText: "",
-    profile: ""
+    profileData: {}
 };
 // export type ActionAddPostTypes =
 //     ReturnType<typeof addPostAC>
@@ -48,7 +49,7 @@ const profileReducer = (state = initialState, action: MessageActionTypes): Profi
         case SET_PROFILE_INFO:
             return {
                 ...state,
-               // profile: action
+                profileData: action
             };
         default:
             return state;
@@ -68,7 +69,7 @@ interface UndatePostAction {
 }
 interface SetProfileInfoType {
     type: typeof SET_PROFILE_INFO
-    profile: string
+    profileData: ResponseProfileType
 }
 export type MessageActionTypes = AddPostAction | UndatePostAction | SetProfileInfoType;
 
@@ -76,8 +77,8 @@ export type MessageActionTypes = AddPostAction | UndatePostAction | SetProfileIn
 export const addPostAC = (): AddPostAction => ({type: ADD_POST} as const);
 export const updateNewPostTextAC = (text: string): UndatePostAction => {
     return {type: UPDATE_NEW_POST_TEXT, newPostText: text} as const};
-export const setPofileInfo = (profile: string): SetProfileInfoType => {
-    return {type: SET_PROFILE_INFO, profile}
+export const setProfileInfo = (profileData: ResponseProfileType): SetProfileInfoType => {
+    return {type: SET_PROFILE_INFO, profileData}
 };
 
 export default profileReducer;
