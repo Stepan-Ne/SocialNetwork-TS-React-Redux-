@@ -15,6 +15,8 @@ export type RootState = ReturnType<typeof reducers>
 
 let store = createStore(reducers);
 
+//window.store = store
+
 export type StoreType = typeof store;
 
 export default store;

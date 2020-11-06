@@ -4,9 +4,10 @@ import MyPostsContainer from "../MyPostsContainer";
 import {connect} from "react-redux";
 import axios from "axios"
 import {setProfileInfo} from "../../../Redux/profileReducer";
+import RootState from "./../../../Redux/redux-store"
 
 type ProfilePropsType = {
-    profile: ResponseProfileType
+    profile: any
     setProfileInfo: (profileData: ResponseProfileType) => void
 }
 export type ResponseProfileType = {
@@ -36,7 +37,7 @@ class ProfileContainer extends React.Component<ProfilePropsType, ResponseProfile
     componentDidMount(): void {
         axios.get<ResponseProfileType>('https://social-network.samuraijs.com/api/1.0/profile/2')
             .then(response => {
-                console.log(response.data)
+                //console.log("resp", response.data)
                 this.props.setProfileInfo(response.data)
             })
     }
@@ -51,9 +52,10 @@ class ProfileContainer extends React.Component<ProfilePropsType, ResponseProfile
     }
 }
 
-const mapStateToProps = (state: ResponseProfileType) => {
+const mapStateToProps = (state: any) => {
+    
     return {
-        profile: state
+        profile: state.profilePage.profileData.profileData
     }
 };
 
