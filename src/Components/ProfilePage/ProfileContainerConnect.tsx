@@ -5,7 +5,7 @@ import Preloader from "../Common/Preloader/Preloader";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {setProfile} from "./../../Redux/profileReducer"
 import { RootState } from "../../Redux/redux-store";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainerConnect from "./MyPosts/MyPosts";
 
 
 export type ProfileType = {
@@ -52,7 +52,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, {}> {
                ? <img src={profile.photos.large} alt="logo"/>
             : <Preloader/>} */}
                 <ProfileInfo {...this.props}/>
-                <MyPosts/>
+                <MyPostsContainerConnect/>
             </div>
         )
     }
