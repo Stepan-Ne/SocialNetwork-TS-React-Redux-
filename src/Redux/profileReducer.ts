@@ -1,12 +1,21 @@
 import { ProfileType } from './../Components/ProfilePage/ProfileContainerConnect'
 
-type stateType = {
+export type PostType = {
+    id: string,
+    text: string
+    likesCount: string
+}
+export type stateType = {
     profile: ProfileType | null
     newPostText: string
+    posts: Array<PostType>
 }
 const initialState: stateType = {
     profile: null,
-    newPostText: ''
+    newPostText: '',
+    posts: [
+        {id: '1', text: 'There is the fist post on this page', likesCount: "0"}
+    ]
 }
 function profileReducer (state = initialState, action: AllActionsType) {
 
@@ -21,6 +30,18 @@ function profileReducer (state = initialState, action: AllActionsType) {
                 ...state,
                 newPostText: action.newPostText
             };
+            case ADD_POST:
+                if (state.newPostText.trim()) {
+                    let newId = Date.now().toString();
+                    return {
+                        ...state,
+                        newPostText: "",
+                        posts: [...state.posts,
+                            {id: newId, message: state.newPostText, likesCount: 0} ]
+                    }
+                 } else {
+                    alert("Oups!")
+                 };
             default:
         return state;
     }
@@ -53,7 +74,18 @@ export const updatePostText = (newPostText: string): updatePostTextType => {
   }
 };
 
+//ADD_POST AC
+const ADD_POST = 'ADD_POST';
+type AddPostType = {
+    type: typeof ADD_POST
+}
+export const addPost = (): AddPostType => {
+  return {
+    type: ADD_POST
+  }
+};
+
 //ALL_ACTIONS_TYPE
-type AllActionsType = updatePostTextType | SetProfileType
+type AllActionsType = updatePostTextType | SetProfileType | AddPostType;
 
 export default profileReducer;

@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios"
 import Preloader from "../Common/Preloader/Preloader";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {setProfile} from "./../../Redux/profileReducer"
+import {setProfile, stateType} from "./../../Redux/profileReducer"
 import { RootState } from "../../Redux/redux-store";
 import MyPostsContainerConnect from "./MyPosts/MyPosts";
 
@@ -31,7 +31,7 @@ export type ProfileType = {
 }
 type ProfileContainerType = {
     setProfile: (data: ProfileType) => any
-    profile: ProfileType | null
+    profile: stateType
 }
 
 class ProfileContainer extends React.Component<ProfileContainerType, {}> {
@@ -44,7 +44,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, {}> {
     }
 
     render() {
-        const proooofile = this.state
+        //const proooofile = this.state
         
         return (
             <div>
@@ -60,7 +60,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, {}> {
 
 const mapStateToProps = (state: RootState) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage
     }
 }
 

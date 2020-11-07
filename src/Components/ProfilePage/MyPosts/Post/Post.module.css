@@ -1,0 +1,11 @@
+.item {
+  background-color: lightblue;
+  margin-top: 1rem;
+  max-width: 50%;
+  padding: 1rem;
+
+}
+.item span {
+  background-color: beige;
+  color: brown;
+}

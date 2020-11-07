@@ -4,17 +4,17 @@ import Preloader from '../../Common/Preloader/Preloader'
 import { ProfileType } from './../ProfileContainerConnect'
 
 type PropsType = {
-  profile: ProfileType | null
+  profile: any | null
 }
 
 const ProfileInfo = (props: PropsType) => {
   return (
     <div>
-      {props.profile ? (
+      {props.profile.profile ? (
         <div>
-          <img src={props.profile.photos.large} alt="logo" />
-          <p>Full name: {props.profile.fullName}</p>
-          <p>About me: {props.profile.aboutMe}</p>
+          <img src={props.profile.profile.photos.large} alt="logo" />
+          <p>Full name: {props.profile.profile.fullName}</p>
+          <p>About me: {props.profile.profile.aboutMe}</p>
         </div>
       ) : (
         <Preloader />
