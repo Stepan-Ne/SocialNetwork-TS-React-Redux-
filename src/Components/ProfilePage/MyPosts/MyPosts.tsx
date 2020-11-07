@@ -2,13 +2,14 @@ import React, { ChangeEvent } from 'react'
 import classes from './ProfilePage.module.css'
 import { connect } from 'react-redux'
 import { RootState } from '../../../Redux/redux-store'
-import { updatePostText, addPost, stateType, PostType } from '../../../Redux/profileReducer'
+import { updatePostText, addPost, stateType, PostType, like } from '../../../Redux/profileReducer'
 import Post from './Post/Post'
 
 type MyPostsPropsType = {
   myPostsData: stateType
   updatePostText: (text: string) => void
   addPost: () => void
+  like: (likesCount: string, idPost: string) => void
 }
 const MyPosts = (props: MyPostsPropsType) => {
   function onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
@@ -37,6 +38,7 @@ const MyPosts = (props: MyPostsPropsType) => {
               key={p.id}
               likesCount={p.likesCount}
               id={p.id}
+              like={props.like}
             />
           ))}
         </div>
@@ -54,6 +56,7 @@ const mapStateToProps = (state: RootState) => {
 const dispatchProps = {
   updatePostText,
   addPost,
+  like
 }
 const MyPostsContainerConnect = connect(mapStateToProps, dispatchProps)(MyPosts)
 
