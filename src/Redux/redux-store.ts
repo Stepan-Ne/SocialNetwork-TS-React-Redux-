@@ -5,18 +5,15 @@ import usersReducer from "./usersReducer";
 
 // export type dispatchApp = typeof store.dispatch;
 
-let reducers = combineReducers({
-    profilePage: profileReducer,
+const reducers = combineReducers({
+     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer
 });
 
+
+const store = createStore(reducers);
+
+//export type StoreType = typeof store;
 export type RootState = ReturnType<typeof reducers>
-
-let store = createStore(reducers);
-
-//window.store = store
-
-export type StoreType = typeof store;
-
 export default store;

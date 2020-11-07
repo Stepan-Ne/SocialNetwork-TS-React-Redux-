@@ -26,7 +26,7 @@ export type UsersDataType = {
 }
 
 const usersReducer = (state = initialState, action: UserActionsType):
-    UsersDataType | [] => {
+    UsersDataType => {
 
     switch (action.type) {
         case FOLLOWED:
