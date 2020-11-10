@@ -19,7 +19,7 @@ const App = () => {
                 <Header/>
                 <Nav/>
                 <div className="content">
-                    <Route path="/profile" render={() => <ProfileContainerConnect/>}/>
+                    <Route path="/profile/:userId?" render={() => <ProfileContainerConnect/>}/>
 
                     <Route path="/users" render={() => <UsersContainerConnect/>}/>
 
